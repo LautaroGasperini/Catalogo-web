@@ -29,10 +29,13 @@ namespace Catalogo_web_productos
                 if (negocio.Login(usuario))
                 {
                     Session.Add("user", usuario);
+                    Session.Add("UserID", usuario.Id);
                     Response.Redirect("Default.aspx", false);
                     return;
                 }
-                Response.Redirect("Error.aspx", false);
+                lblError.Text = "Email o contraseña incorrectos.";
+                lblError.Visible = true;
+                //Response.Redirect("Error.aspx", false);
             }
             catch (Exception ex)
             {

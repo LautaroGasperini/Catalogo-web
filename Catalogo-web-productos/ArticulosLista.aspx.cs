@@ -2,6 +2,7 @@
 using Negocio;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -13,10 +14,26 @@ namespace Catalogo_web_productos
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Page.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
             ArticuloNegocio negocio = new ArticuloNegocio();
             Session.Add("listaArticulos", negocio.listarConSP());
             dgvArticulos.DataSource = Session["listaArticulos"];
             dgvArticulos.DataBind();
+
+            if (Session["user"] == null || !Seguridad.esAdmin((Usuario)Session["user"]))
+            {
+                Response.Redirect("Default.aspx");
+            }
+            if (!IsPostBack)
+            {
+                if (ddlCampo.SelectedItem.ToString() == "Nombre")
+                {
+                    ddlCriterio.Items.Add("Empieza con");
+                    ddlCriterio.Items.Add("Contiene");
+                    ddlCriterio.Items.Add("Termina con");
+                }
+            }
+
         }
 
         protected void dgvArticulos_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -47,6 +64,12 @@ namespace Catalogo_web_productos
         {
             try
             {
+                if (ddlCriterio.SelectedItem == null)
+                {
+                    lblValidacion.Text = "*Debes cargar un criterio";
+                    lblValidacion.ForeColor = Color.Red;
+                    return;
+                }
                 ArticuloNegocio negocio = new ArticuloNegocio();
                 dgvArticulos.DataSource = negocio.filtrar(ddlCampo.SelectedItem.ToString(), ddlCriterio.SelectedItem.ToString(), txtFiltroAvanzado.Text);
                 dgvArticulos.DataBind();
@@ -62,6 +85,7 @@ namespace Catalogo_web_productos
         protected void ddlCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
             ddlCriterio.Items.Clear();
+
             if (ddlCampo.SelectedItem.ToString() == "Precio")
             {
                 ddlCriterio.Items.Add("Igual a");
@@ -74,6 +98,11 @@ namespace Catalogo_web_productos
                 ddlCriterio.Items.Add("Contiene");
                 ddlCriterio.Items.Add("Termina con");
             }
+        }
+
+        protected void cvCriterio_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            args.IsValid = ddlCriterio.SelectedValue != "0";
         }
     }
 }

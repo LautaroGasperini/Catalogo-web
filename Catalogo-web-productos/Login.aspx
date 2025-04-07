@@ -18,6 +18,8 @@
                 <asp:Button ID="btnIngresar" runat="server" Text="Ingresar" CssClass="btn btn-secondary" OnClick="btnIngresar_Click" />
                 <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-secondary" OnClick="btnCancelar_Click" />
             </div>
+            <asp:Label ID="lblError" runat="server" ForeColor="Red" CssClass="align-self-md-center" Visible="false"></asp:Label>
+
             <br />
             <a href="Registro.aspx">¿Todavia no tienes una cuenta? Registrate Aqui!</a>
         </div>

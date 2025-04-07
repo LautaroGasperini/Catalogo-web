@@ -14,7 +14,7 @@ namespace Negocio
 {
     public class ArticuloNegocio
     {
-        public List<Articulo> listarCatalogo(string id ="")
+        public List<Articulo> listarCatalogo(string id = "")
         {
             List<Articulo> listacatalogo = new List<Articulo>();
             AcessoDatos datos = new AcessoDatos();
@@ -28,7 +28,10 @@ namespace Negocio
                 comando.CommandType = System.Data.CommandType.Text;
                 comando.CommandText = "select a.Id, Codigo,Nombre,a.Descripcion,c.Id,c.Descripcion Categoria,m.Id, m.Descripcion Marca, ImagenUrl, Precio from ARTICULOS a, CATEGORIAS c, MARCAS m where m.Id = a.IdMarca and c.Id= a.IdCategoria ";
                 if (id != "")
-                    comando.CommandText +=" and a.Id= " + id;
+                {
+                    comando.CommandText += " and a.Id = @Id";
+                    comando.Parameters.AddWithValue("@Id", id);
+                }
                 comando.Connection = conexion;
 
                 conexion.Open();
@@ -37,23 +40,22 @@ namespace Negocio
                 while (lector.Read())
                 {
                     Articulo aux = new Articulo();
-                    System.Diagnostics.Debug.WriteLine("ID desde la BD: " + lector["Id"]);
                     aux.Id = (int)lector["Id"];
                     aux.Codigo = (string)lector["Codigo"];
                     aux.Nombre = (string)lector["Nombre"];
                     aux.Descripcion = (string)lector["Descripcion"];
                     aux.Categoria = new Categorias();
                     aux.Categoria.Id = (int)lector["Id"];
-                    aux.Categoria.Categoria = (string)lector["Categoria"];     
+                    aux.Categoria.Categoria = (string)lector["Categoria"];
                     aux.Marca = new Marcas();
-                    aux.Marca.Id = (int) lector["Id"];
+                    aux.Marca.Id = (int)lector["Id"];
                     aux.Marca.Marca = (string)lector["Marca"];
                     if (!(lector["ImagenUrl"] is DBNull))
                         aux.UrlImagen = (string)lector["ImagenUrl"];
                     aux.Precio = (decimal)lector["Precio"];
 
-                    
-                    
+
+
 
                     listacatalogo.Add(aux);
                 }
@@ -62,10 +64,10 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                
+
                 throw ex;
             }
-           
+
         }
 
         public List<Articulo> listarConSP()
@@ -92,7 +94,7 @@ namespace Negocio
                     if (!(datos.Lector["ImagenUrl"] is DBNull))
                         aux.UrlImagen = (string)datos.Lector["ImagenUrl"];
                     aux.Precio = (decimal)datos.Lector["Precio"];
-                    
+
 
                     lista.Add(aux);
                 }
@@ -100,7 +102,7 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-              
+
                 throw ex;
             }
 
@@ -111,13 +113,13 @@ namespace Negocio
             try
             {
                 datos.setearConsulta("insert into ARTICULOS(Codigo,Nombre,Descripcion,IdMarca,IdCategoria,ImagenUrl,Precio) values(@Codigo,@Nombre,@Descripcion,@IdMarca,@IdCategoria,@ImagenUrl,@Precio)");
-                datos.setearParametro("@Codigo",nuevo.Codigo);
-                datos.setearParametro("@Nombre",nuevo.Nombre);
-                datos.setearParametro("@Descripcion",nuevo.Descripcion);
-                datos.setearParametro("@IdMarca",nuevo.Marca.Id);
-                datos.setearParametro("@IdCategoria",nuevo.Categoria.Id);
-                datos.setearParametro("@ImagenUrl",nuevo.UrlImagen);
-                datos.setearParametro("@Precio",nuevo.Precio);
+                datos.setearParametro("@Codigo", nuevo.Codigo);
+                datos.setearParametro("@Nombre", nuevo.Nombre);
+                datos.setearParametro("@Descripcion", nuevo.Descripcion);
+                datos.setearParametro("@IdMarca", nuevo.Marca.Id);
+                datos.setearParametro("@IdCategoria", nuevo.Categoria.Id);
+                datos.setearParametro("@ImagenUrl", nuevo.UrlImagen);
+                datos.setearParametro("@Precio", nuevo.Precio);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -127,7 +129,7 @@ namespace Negocio
             }
             finally
             {
-                datos.cerrarConexion(); 
+                datos.cerrarConexion();
             }
         }
 
@@ -158,7 +160,7 @@ namespace Negocio
         }
         public void modificar(Articulo modificar)
         {
-            AcessoDatos datos=new AcessoDatos();
+            AcessoDatos datos = new AcessoDatos();
             try
             {
                 datos.setearConsulta("update ARTICULOS set Codigo = @Codigo,Nombre = @Nombre,Descripcion = @Descripcion, IdCategoria = @IdCategoria, IdMarca = @IdMarca, ImagenUrl = @ImagenUrl, Precio= @Precio where Id = @Id");
@@ -204,7 +206,7 @@ namespace Negocio
 
                 throw ex;
             }
-            finally 
+            finally
             {
                 datos.cerrarConexion();
             }
@@ -216,7 +218,7 @@ namespace Negocio
             {
                 AcessoDatos datos = new AcessoDatos();
                 datos.setearConsulta("delete from ARTICULOS where Id = @Id");
-                datos.setearParametro("@Id",id);
+                datos.setearParametro("@Id", id);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -224,11 +226,11 @@ namespace Negocio
 
                 throw ex;
             }
-            
+
         }
-        public void VerDetalles(int id)
+        public void VerDetalles(string id)
         {
-            
+
             AcessoDatos datos = new AcessoDatos();
 
             try
@@ -239,7 +241,7 @@ namespace Negocio
 
                 while (datos.Lector.Read())
                 {
-                    Articulo catalogo = new Articulo();                    
+                    Articulo catalogo = new Articulo();
                     catalogo.Codigo = (string)datos.Lector["Codigo"];
                     catalogo.Nombre = (string)datos.Lector["Nombre"];
                     catalogo.Descripcion = (string)datos.Lector["Descripcion"];
@@ -248,6 +250,7 @@ namespace Negocio
                     catalogo.Marca = new Marcas();
                     catalogo.Marca.Marca = (string)datos.Lector["Marca"];
                 }
+
 
             }
             catch (Exception ex)
@@ -263,7 +266,7 @@ namespace Negocio
             try
             {
                 string consulta = "select a.Id, Codigo,Nombre,a.Descripcion,c.Id,c.Descripcion Categoria,m.Id, m.Descripcion Marca, ImagenUrl, Precio from ARTICULOS a inner join CATEGORIAS c on a.IdCategoria = c.Id inner join MARCAS m on a.IdMarca = m.Id where  ";
-                if(campo == "Precio")
+                if (campo == "Precio")
                 {
                     switch (criterio)
                     {
@@ -277,14 +280,14 @@ namespace Negocio
                             consulta += "Precio = " + filtro;
                             break;
                     }
-                    
+
                 }
-                else if(campo == "Categoria")
+                else if (campo == "Categoria")
                 {
                     switch (criterio)
                     {
                         case "Empieza con":
-                            consulta += "c.Descripcion like '"+ filtro +"%'";
+                            consulta += "c.Descripcion like '" + filtro + "%'";
                             break;
                         case "Termina con":
                             consulta += "c.Descripcion like '%" + filtro + "'";
@@ -325,7 +328,7 @@ namespace Negocio
                     }
                 }
 
-                datos.setearConsulta( consulta );
+                datos.setearConsulta(consulta);
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
@@ -358,5 +361,6 @@ namespace Negocio
                 throw ex;
             }
         }
+        
     }
 }

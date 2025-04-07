@@ -21,6 +21,7 @@ namespace Negocio
                 if (datos.Lector.Read())
                 {
                     usuario.Id = (int)datos.Lector["Id"];
+                    
                     usuario.admin = (bool)datos.Lector["admin"];
                     if (!(datos.Lector["nombre"] is DBNull))
                         usuario.nombre = (string)datos.Lector["nombre"];
@@ -29,9 +30,35 @@ namespace Negocio
                     if (!(datos.Lector["urlImagenPerfil"] is DBNull))
                         usuario.urlImagenPerfil = (string)datos.Lector["urlImagenPerfil"];
 
+                    
+
                     return true;
                 }
+                
                 return false;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void actualizar(Usuario usuario)
+        {
+            AcessoDatos datos = new AcessoDatos();
+            try
+            {
+                datos.setearConsulta("update USERS set email=@email,nombre=@name,apellido=@apellido,urlImagenPerfil=@img where Id= @id");
+                datos.setearParametro("@email",usuario.email);
+                datos.setearParametro("@name",usuario.nombre);
+                datos.setearParametro("@apellido",usuario.apellido);
+                datos.setearParametro("@img",(object)usuario.urlImagenPerfil ?? DBNull.Value);
+                datos.setearParametro("@id",usuario.Id);
+                datos.ejecutarAccion();
             }
             catch (Exception ex)
             {

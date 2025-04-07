@@ -37,7 +37,16 @@
         <div class="col-3">
             <div class="mb-3">
                 <asp:Label Text="Criterio" runat="server" />
+                <asp:Label Text="" ID="lblValidacion" CssClass="" runat="server" />
                 <asp:DropDownList runat="server" ID="ddlCriterio" CssClass="form-control"></asp:DropDownList>
+                <asp:CustomValidator
+                    ID="cvCriterio"
+                    runat="server"
+                    ControlToValidate="ddlCriterio"
+                    ErrorMessage="Seleccioná un criterio válido"
+                    OnServerValidate="cvCriterio_ServerValidate"
+                    ForeColor="Red"
+                    Display="Dynamic" />
             </div>
         </div>
         <div class="col-3">
@@ -62,7 +71,7 @@
             <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
             <asp:BoundField HeaderText="Categoria" DataField="Categoria" />
             <asp:BoundField HeaderText="Marca" DataField="Marca" />
-            <asp:BoundField HeaderText="Precio" DataField="Precio" DataFormatString="{0:N0}" HtmlEncode="false" />
+            <asp:BoundField HeaderText="Precio" DataField="Precio" DataFormatString='AR$ {0:N2}' HtmlEncode="false" />
             <asp:CommandField HeaderText="Accion" ShowSelectButton="true" SelectText="Modificar" />
         </Columns>
     </asp:GridView>

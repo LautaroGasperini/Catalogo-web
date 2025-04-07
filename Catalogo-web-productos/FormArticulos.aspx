@@ -13,11 +13,11 @@
             </div>
             <div class="mb-3">
                 <asp:Label Text="Codigo" runat="server" />
-                <asp:TextBox runat="server" ID="txtCodigo" CssClass="form-control" />
+                <asp:TextBox runat="server" ID="txtCodigo" CssClass="form-control" required="true" />
             </div>
             <div class="mb-3">
                 <asp:Label Text="Nombre" runat="server" />
-                <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" />
+                <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" required="true" />
             </div>
             <div class="mb-3">
                 <asp:Label Text="Descripcion" runat="server" />
@@ -33,7 +33,7 @@
             </div>
             <div class="mb-3">
                 <asp:Label Text="Precio" runat="server" />
-                <asp:TextBox runat="server" ID="txtPrecio" CssClass="form-control" />
+                <asp:TextBox TextMode="Number" runat="server" ID="txtPrecio" CssClass="form-control" required="true" />
             </div>
             <div class="mb-3">
                 <asp:Button Text="Aceptar" runat="server" CssClass="btn btn-primary" ID="btnAceptar" OnClick="btnAceptar_Click" />

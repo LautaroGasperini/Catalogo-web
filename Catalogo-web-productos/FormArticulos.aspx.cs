@@ -2,6 +2,7 @@
 using Negocio;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -53,10 +54,11 @@ namespace Catalogo_web_productos
                     txtDescripcion.Text = seleccionado.Descripcion;
                     ddlMarca.SelectedValue = seleccionado.Marca.Id.ToString();
                     ddlCategoria.SelectedValue = seleccionado.Categoria.Id.ToString();
-                    txtPrecio.Text = seleccionado.Precio.ToString();
+                    txtPrecio.Text = seleccionado.Precio.ToString("0.##", CultureInfo.InvariantCulture);
                     txtUrlImagen.Text = seleccionado.UrlImagen;
                     txtUrlImagen_TextChanged(sender, e);
                 }
+
             }
             catch (Exception ex)
             {

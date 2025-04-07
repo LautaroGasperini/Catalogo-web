@@ -20,9 +20,14 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-link active" aria-current="page" href="Default.aspx">Home</a>
-                        <a class="nav-link" href="ArticulosLista.aspx">Lista Articulos</a>
-                        <a class="nav-link" href="#">Mi Perfil</a>
-                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                        <% Dominio.Usuario usuario = (Dominio.Usuario)Session["user"];
+                            if (Negocio.Seguridad.esAdmin(usuario))
+                            {%>
+                                <a class="nav-link" href="ArticulosLista.aspx">Lista Articulos</a>
+
+                            <%} %>
+                        <a class="nav-link" href="MiPerfil.aspx">Mi Perfil</a>
+                        <a class="nav-link" href="Favoritos.aspx">Mis Favoritos</a>
                     </div>
                     <%if (!(Session["user"] != null))
                         {%>
@@ -34,7 +39,7 @@
                     <%}
                         else
                         {%>
-                    <div class="d-flex ms-auto" >
+                    <div class="d-flex ms-auto">
                         <asp:Button Text="Salir" ID="btnSalir" CssClass="btn btn-danger" runat="server" OnClick="btnSalir_Click" />
                     </div>
                     <%} %>

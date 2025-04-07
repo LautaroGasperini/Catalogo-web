@@ -25,10 +25,24 @@ namespace Catalogo_web_productos
                 {
                     Usuario user = (Usuario)Session["user"];
                     if(!string.IsNullOrEmpty(user.urlImagenPerfil))
-                        imgFotoPerfil.ImageUrl = "~/Images/" + user.urlImagenPerfil;
+                        imgFotoPerfil.ImageUrl = "~/Images/" + ((Usuario)Session["user"]).urlImagenPerfil;
                        
                 }
             }
+
+            if (Seguridad.sesionActiva(Session["user"]))
+            {
+                Usuario usuario = (Usuario)Session["user"];
+                if (!string.IsNullOrEmpty(usuario.urlImagenPerfil))
+                    imgFotoPerfil.ImageUrl = "/Images/" + usuario.urlImagenPerfil; // 🔹 Ruta corregida
+                else
+                    imgFotoPerfil.ImageUrl = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
+            }
+            else
+            {
+                imgFotoPerfil.ImageUrl = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
+            }
+
 
         }
 
