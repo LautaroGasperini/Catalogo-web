@@ -28,8 +28,15 @@ namespace Catalogo_web_productos
         {
             try
             {
-                Usuario usuario = new Usuario();
                 UsuarioNegocio negocio = new UsuarioNegocio();
+                AcessoDatos datos = new AcessoDatos();
+                if (negocio.ExisteEmail(txtEmail.Text))
+                {
+                    lblEmail.Text = "Este correo ya existe, intenta con otro.";
+                    lblEmail.Visible = true;
+                    return;
+                }
+                Usuario usuario = new Usuario();
                 EmailService emailService = new EmailService();
                 usuario.email = txtEmail.Text;
                 usuario.pass = txtPassword.Text;
@@ -39,6 +46,7 @@ namespace Catalogo_web_productos
                     " no pierdas tiempo y empeza a implementar esta web a tu negocio para manejar tus productos de la mejor forma posible ");
                 emailService.enviarEmail();
                 Response.Redirect("Default.aspx", false);
+
             }
             catch (Exception ex)
             {

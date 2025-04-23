@@ -15,7 +15,7 @@
         </div>
         <div class="col-6">
             <div class="mb-3">
-                <asp:CheckBox Text="Filtro Avanzando" ID="chkAvanzado" CssClass="form-check form-switch" AutoPostBack="true" OnCheckedChanged="chkAvanzado_CheckedChanged" runat="server" />
+                <asp:CheckBox Text="Filtro Avanzando" ID="chkAvanzado" CssClass="form-check form-switch checked" AutoPostBack="true" OnCheckedChanged="chkAvanzado_CheckedChanged" runat="server" />
             </div>
         </div>
     </div>
@@ -57,7 +57,7 @@
         </div>
         <div class="col-3">
             <div class="mb-3">
-                <asp:Button Text="Buscar" ID="btnBuscar" CssClass="btn btn-primary" OnClick="btnBuscar_Click" runat="server" />
+                <asp:Button Text="Buscar" ID="btnBuscar" CssClass="btn btn-primary" style="margin-top:23px;" OnClick="btnBuscar_Click" runat="server" />
             </div>
         </div>
     </div>
@@ -72,7 +72,7 @@
             <asp:BoundField HeaderText="Categoria" DataField="Categoria" />
             <asp:BoundField HeaderText="Marca" DataField="Marca" />
             <asp:BoundField HeaderText="Precio" DataField="Precio" DataFormatString='AR$ {0:N2}' HtmlEncode="false" />
-            <asp:CommandField HeaderText="Accion" ShowSelectButton="true" SelectText="Modificar" />
+            <asp:CommandField HeaderText="Accion" ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Modificar" />
         </Columns>
     </asp:GridView>
     <a href="FormArticulos.aspx" class="btn btn-primary">Agregar</a>

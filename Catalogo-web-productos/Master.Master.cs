@@ -46,11 +46,6 @@ namespace Catalogo_web_productos
 
         }
 
-        protected void btnRegistrar_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Registro.aspx");
-        }
-
         protected void btnSalir_Click(object sender, EventArgs e)
         {
             Session.Clear();

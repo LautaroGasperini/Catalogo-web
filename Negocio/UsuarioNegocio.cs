@@ -91,5 +91,26 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public bool ExisteEmail(string email)
+        {
+           AcessoDatos datos =new AcessoDatos();
+
+            try
+            {
+                datos.setearConsulta("select COUNT(*) from USERS where email= @email");
+                datos.setearParametro("@email", email);
+                datos.ejecutarLectura();
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@
 using Negocio;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Net.Mail;
 using System.Web;
@@ -33,9 +34,11 @@ namespace Catalogo_web_productos
                     Response.Redirect("Default.aspx", false);
                     return;
                 }
+
                 lblError.Text = "Email o contraseña incorrectos.";
                 lblError.Visible = true;
                 //Response.Redirect("Error.aspx", false);
+
             }
             catch (Exception ex)
             {

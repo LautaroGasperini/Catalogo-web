@@ -89,5 +89,6 @@ namespace Negocio
                 lector.Close();
             conexion.Close();
         }
+
     }
 }

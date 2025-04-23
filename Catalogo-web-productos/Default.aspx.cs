@@ -28,7 +28,6 @@ namespace Catalogo_web_productos
                     Session["Favoritos"] = new List<int>();
                 }
 
-
                 ArticuloNegocio negocio = new ArticuloNegocio();
                 ListaArticulos = negocio.listarConSP();
                 repArticulos.DataSource = ListaArticulos;
