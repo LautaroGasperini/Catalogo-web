@@ -1,0 +1,200 @@
+﻿/*DEFAULT.ASPX*/
+body {
+    background-color: #1e1e2f;
+    color: #f1f1f1;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Cards */
+.card {
+    background-color: #2c2f36;
+    border: 1px solid #3a3a4d;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    color: #f1f1f1;
+    display:flex;
+    flex-direction:column;
+}
+
+.btn-fav {
+    font-size: 1.1rem;
+    padding: 8px 12px;
+    line-height: 1;
+}
+
+.card:hover {
+    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+}
+
+.custom-card {
+    width: 100%;
+    max-width: 400px;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    max-height: 450px;
+}
+
+
+.card-title, .card-text {
+    text-align: center;
+    color: #f1f1f1;
+}
+
+.card a {
+    display: flex;
+    margin-top: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: #4dabf7;
+}
+
+    .card a:hover {
+        text-decoration: underline;
+        color: #f1f1f1;
+    }
+
+.card-img-wrapper {
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: white;
+    padding: 10px;
+    
+}
+
+    .card-img-wrapper img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+    }
+
+/* Navbar */
+.navbar {
+    background-color: #14141f !important;
+}
+
+.navbar-brand, .nav-link, .navbar-text {
+    color: #f1f1f1 !important;
+}
+
+    .nav-link:hover {
+        color: #4dabf7 !important;
+    }
+
+/* Botones */
+.btn-outline-light {
+    color: #f1f1f1;
+    border-color: #4dabf7;
+}
+
+    .btn-outline-light:hover {
+        background-color: #4dabf7;
+        color: #1e1e2f;
+    }
+
+/* Contenedor general de cards */
+.container {
+    margin-top: 20px;
+}
+
+
+.bienvenida-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 40vh;
+    text-align: center;
+    padding: 20px 10px;
+    background-color: #2c2f36;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.titulo-bienvenida {
+    font-size: 2.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #f1f1f1;
+}
+
+.descripcion-bienvenida {
+    font-size: 1.2rem;
+    color: #f1f1f1;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/*LOGIN/REGISTER*/
+
+.login-card{
+    border:groove;
+    margin-bottom:200px;
+    border-radius:10px
+}
+.mensaje-error {
+    height: 20px;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    margin-left: 2.8rem;
+}
+.container-register{
+    width:435px;
+}
+
+
+
+/*DETALLES*/
+
+.card-detalles{
+    border:groove;
+    border-radius:20px;
+    margin-left:220px;
+}
+
+.card-text-detalles{
+    padding:50px;
+    padding-left:40px;
+}
+.card-title{
+    font-size:1.8rem;
+}
+.img-detalles{
+    margin:30px 0 0 40px;
+}
+
+/*MI PERFIL*/
+.perfil-card {
+    max-width: 800px;
+    width: 100%;
+    background-color: #242437;
+    margin-top:50px
+}
+
+.perfil-img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 3px solid #ccc;
+}
+
+/*FORM*/
+.checked{
+    margin:30px 0 0 0;
+}
+.table {
+    width: 100%;
+    background-color: black;
+    color: white;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
