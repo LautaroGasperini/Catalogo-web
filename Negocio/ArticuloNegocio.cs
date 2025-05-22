@@ -26,7 +26,7 @@ namespace Negocio
             {
                 conexion.ConnectionString = "server=.; database=CATALOGO_WEB_DB; integrated security=true";
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "select a.Id, Codigo,Nombre,a.Descripcion,c.Id,c.Descripcion Categoria,m.Id, m.Descripcion Marca, ImagenUrl, Precio from ARTICULOS a, CATEGORIAS c, MARCAS m where m.Id = a.IdMarca and c.Id= a.IdCategoria ";
+                comando.CommandText = "select a.Id, Codigo,Nombre,a.Descripcion,c.Id IdCategoria,c.Descripcion Categoria,m.Id IdMarca, m.Descripcion Marca, ImagenUrl, Precio from ARTICULOS a, CATEGORIAS c, MARCAS m where m.Id = a.IdMarca and c.Id= a.IdCategoria ";
                 if (id != "")
                 {
                     comando.CommandText += " and a.Id = @Id";
@@ -45,10 +45,10 @@ namespace Negocio
                     aux.Nombre = (string)lector["Nombre"];
                     aux.Descripcion = (string)lector["Descripcion"];
                     aux.Categoria = new Categorias();
-                    aux.Categoria.Id = (int)lector["Id"];
+                    aux.Categoria.Id = (int)lector["IdCategoria"];
                     aux.Categoria.Categoria = (string)lector["Categoria"];
                     aux.Marca = new Marcas();
-                    aux.Marca.Id = (int)lector["Id"];
+                    aux.Marca.Id = (int)lector["IdMarca"];
                     aux.Marca.Marca = (string)lector["Marca"];
                     if (!(lector["ImagenUrl"] is DBNull))
                         aux.UrlImagen = (string)lector["ImagenUrl"];
@@ -167,8 +167,8 @@ namespace Negocio
                 datos.setearParametro("@Codigo", modificar.Codigo);
                 datos.setearParametro("@Nombre", modificar.Nombre);
                 datos.setearParametro("@Descripcion", modificar.Descripcion);
-                datos.setearParametro("@IdMarca", modificar.Marca.Id);
                 datos.setearParametro("@IdCategoria", modificar.Categoria.Id);
+                datos.setearParametro("@IdMarca", modificar.Marca.Id);
                 datos.setearParametro("@ImagenUrl", modificar.UrlImagen);
                 datos.setearParametro("@Precio", modificar.Precio);
                 datos.setearParametro("@Id", modificar.Id);

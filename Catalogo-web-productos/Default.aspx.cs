@@ -29,7 +29,7 @@ namespace Catalogo_web_productos
                 }
 
                 ArticuloNegocio negocio = new ArticuloNegocio();
-                ListaArticulos = negocio.listarConSP();
+                ListaArticulos = negocio.listarCatalogo();
                 repArticulos.DataSource = ListaArticulos;
                 repArticulos.DataBind();
             }

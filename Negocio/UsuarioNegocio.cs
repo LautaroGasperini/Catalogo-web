@@ -71,14 +71,35 @@ namespace Negocio
             }
         }
 
-        public int insertarNuevo(Usuario usuario)
+        //public int insertarNuevoSP(Usuario usuario)
+        //{
+        //    AcessoDatos datos = new AcessoDatos();
+        //    try
+        //    {
+        //        datos.setearProcedimiento("insertarNuevo");
+        //        datos.setearParametro("@email", usuario.email);
+        //        datos.setearParametro("@pass", usuario.pass);
+        //        return datos.ejecutarAccionScalar();
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        throw ex;
+        //    }
+        //    finally
+        //    {
+        //        datos.cerrarConexion();
+        //    }
+        //}
+
+        public int insertarNuevo(Usuario user)
         {
             AcessoDatos datos = new AcessoDatos();
             try
             {
-                datos.setearProcedimiento("insertarNuevo");
-                datos.setearParametro("@email", usuario.email);
-                datos.setearParametro("@pass", usuario.pass);
+                datos.setearConsulta("insert into USERS(email,Pass, admin) output inserted.Id values (@email,@pass,0)");
+                datos.setearParametro("@email", user.email);
+                datos.setearParametro("@pass", user.pass);
                 return datos.ejecutarAccionScalar();
             }
             catch (Exception ex)
@@ -100,7 +121,13 @@ namespace Negocio
                 datos.setearConsulta("select COUNT(*) from USERS where email= @email");
                 datos.setearParametro("@email", email);
                 datos.ejecutarLectura();
-                return true;
+                if (datos.Lector.Read())
+                {
+                    int count = (int)datos.Lector[0];
+                    return count > 0;
+                }
+
+                return false;
             }
             catch (Exception ex)
             {

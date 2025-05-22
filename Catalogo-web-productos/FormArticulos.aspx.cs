@@ -38,25 +38,25 @@ namespace Catalogo_web_productos
                     ddlCategoria.DataTextField = "Categoria";
                     ddlCategoria.DataBind();
 
+                    string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
+                    if (id != "")
+                    {
+                        ArticuloNegocio negocio = new ArticuloNegocio();
+                        Articulo seleccionado = (negocio.listarCatalogo(id))[0];
 
-                }
-                string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
-                if (id != "" && !IsPostBack)
-                {
-                    ArticuloNegocio negocio = new ArticuloNegocio();
-                    Articulo seleccionado = (negocio.listarCatalogo(id))[0];
+                        Session.Add("articuloSeleccionado", seleccionado);
 
-                    Session.Add("articuloSeleccionado", seleccionado);
+                        txtID.Text = id;
+                        txtCodigo.Text = seleccionado.Codigo;
+                        txtNombre.Text = seleccionado.Nombre;
+                        txtDescripcion.Text = seleccionado.Descripcion;
+                        ddlMarca.SelectedValue = seleccionado.Marca.Id.ToString();
+                        ddlCategoria.SelectedValue = seleccionado.Categoria.Id.ToString();
+                        txtPrecio.Text = seleccionado.Precio.ToString("0.##");
+                        txtUrlImagen.Text = seleccionado.UrlImagen;
+                        txtUrlImagen_TextChanged(sender, e);
+                    }
 
-                    txtID.Text = id;
-                    txtCodigo.Text = seleccionado.Codigo;
-                    txtNombre.Text = seleccionado.Nombre;
-                    txtDescripcion.Text = seleccionado.Descripcion;
-                    ddlMarca.SelectedValue = seleccionado.Marca.Id.ToString();
-                    ddlCategoria.SelectedValue = seleccionado.Categoria.Id.ToString();
-                    txtPrecio.Text = seleccionado.Precio.ToString("0.##", CultureInfo.InvariantCulture);
-                    txtUrlImagen.Text = seleccionado.UrlImagen;
-                    txtUrlImagen_TextChanged(sender, e);
                 }
 
             }
@@ -88,10 +88,10 @@ namespace Catalogo_web_productos
                 if(Request.QueryString["id"] != null)
                 {
                     nuevo.Id = int.Parse(txtID.Text);
-                    negocio.modificarConSP(nuevo);
+                    negocio.modificar(nuevo);
                 }
                 else
-                    negocio.agregarConSP(nuevo);
+                    negocio.agregar(nuevo);
 
                 Response.Redirect("ArticulosLista.aspx", false);
 

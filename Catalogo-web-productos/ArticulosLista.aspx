@@ -69,8 +69,8 @@
             <asp:BoundField HeaderText="Codigo" DataField="Codigo" />
             <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
             <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
-            <asp:BoundField HeaderText="Categoria" DataField="Categoria" />
             <asp:BoundField HeaderText="Marca" DataField="Marca" />
+            <asp:BoundField HeaderText="Categoria" DataField="Categoria" />
             <asp:BoundField HeaderText="Precio" DataField="Precio" DataFormatString='AR$ {0:N2}' HtmlEncode="false" />
             <asp:CommandField HeaderText="Accion" ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Modificar" />
         </Columns>

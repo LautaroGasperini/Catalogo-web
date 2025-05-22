@@ -16,7 +16,7 @@ namespace Catalogo_web_productos
         {
             Page.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
             ArticuloNegocio negocio = new ArticuloNegocio();
-            Session.Add("listaArticulos", negocio.listarConSP());
+            Session.Add("listaArticulos", negocio.listarCatalogo());
             dgvArticulos.DataSource = Session["listaArticulos"];
             dgvArticulos.DataBind();
 
