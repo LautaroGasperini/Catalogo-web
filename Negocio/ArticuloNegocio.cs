@@ -1,6 +1,7 @@
 ﻿using Dominio;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Diagnostics;
@@ -24,7 +25,7 @@ namespace Negocio
 
             try
             {
-                conexion.ConnectionString = "server=.; database=CATALOGO_WEB_DB; integrated security=true";
+                conexion.ConnectionString = ConfigurationManager.AppSettings["cadenaConexion"];
                 comando.CommandType = System.Data.CommandType.Text;
                 comando.CommandText = "select a.Id, Codigo,Nombre,a.Descripcion,c.Id IdCategoria,c.Descripcion Categoria,m.Id IdMarca, m.Descripcion Marca, ImagenUrl, Precio from ARTICULOS a, CATEGORIAS c, MARCAS m where m.Id = a.IdMarca and c.Id= a.IdCategoria ";
                 if (id != "")

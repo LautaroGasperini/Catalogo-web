@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Dominio;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Negocio
 {
@@ -16,7 +17,7 @@ namespace Negocio
 
         public AcessoDatos()
         {
-            conexion = new SqlConnection("server=.; database=CATALOGO_WEB_DB; integrated security=true");
+            conexion = new SqlConnection(ConfigurationManager.AppSettings["cadenaConexion"]);
             comando = new SqlCommand();
         }
 
